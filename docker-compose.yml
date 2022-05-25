@@ -17,7 +17,7 @@ services:
   postgres:
     image: postgres:13
     container_name: db-postgres
-    restart: unless-stopped
+    restart: always
     env_file: Docker/config/db-postgres.conf
     ports:
       - "5432:5432"
@@ -25,18 +25,24 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   mongodemo:
+    restart: always
     container_name: backend-mongodemo
     build:
-      context: docker-mongodemo
+      context: .
       dockerfile: Dockerfile
-    image: docker-mongodemo
+    #volumes:
+    #  - .:/usr/src/app
+    #  - /usr/src/app/target
     ports:
       - 18888:8888
     networks:
-      - spring-cloud-network
+      - main
+    depends_on:
+      - postgres
+      - mongodb
 
 networks:
-  spring-cloud-network:
+  main:
     driver: bridge
 
 volumes:
