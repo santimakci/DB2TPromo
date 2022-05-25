@@ -1,0 +1,44 @@
+---
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo:5.0
+    tty: true
+    container_name: db-mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    env_file:
+      - Docker/config/db-mongo.conf
+
+  postgres:
+    image: postgres:13
+    container_name: db-postgres
+    restart: unless-stopped
+    env_file: Docker/config/db-postgres.conf
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongodemo:
+    container_name: backend-mongodemo
+    build:
+      context: docker-mongodemo
+      dockerfile: Dockerfile
+    image: docker-mongodemo
+    ports:
+      - 18888:8888
+    networks:
+      - spring-cloud-network
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+  postgres_data:
