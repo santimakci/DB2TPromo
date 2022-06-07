@@ -6,11 +6,10 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories
-//@EnableTransactionManagement
+// @EnableTransactionManagement
 public class MongodemoApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(MongodemoApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(MongodemoApplication.class, args);
+  }
 }
