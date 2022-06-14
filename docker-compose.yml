@@ -13,6 +13,9 @@ services:
       - mongo-data:/data/db
     env_file:
       - Docker/config/db-mongo.conf
+    networks:
+      - main
+    command: ["--bind_ip", "0.0.0.0"]
 
   postgres:
     image: postgres:13
@@ -30,11 +33,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    #volumes:
-    #  - .:/usr/src/app
-    #  - /usr/src/app/target
+    env_file:
+      - Docker/config/db-mongo.conf
     ports:
-      - 18888:8888
+      - 8080:8080
     networks:
       - main
     depends_on:

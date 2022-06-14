@@ -4,6 +4,7 @@ package com.zinbig.mongodemo.resources;
 import com.zinbig.mongodemo.dtos.UserRequestDTO;
 import com.zinbig.mongodemo.services.IUserService;
 import javax.inject.Inject;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,11 @@ public class DemoController {
   public void createUser(@RequestBody UserRequestDTO anUserRequestDTO) {
     this.getUsersService()
         .addUser(anUserRequestDTO.name, anUserRequestDTO.username, anUserRequestDTO.password);
+  }
+
+  @GetMapping("/")
+  public String home() {
+    return "Hello World!!";
   }
 
   /**

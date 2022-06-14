@@ -22,35 +22,35 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
 
     return 4;
 
-    //        Update update = new Update();
-    //        update.set("rLiqFilterClassName", aFilterClassName);
-    //        update.set("employees", someEmployees);
-    //        update.set("dateFrom", aDateFrom);
-    //        update.set("dateTo", aDateTo);
-    //        update.set("status", aStatus);
+    //    Update update = new Update();
+    //    update.set("rLiqFilterClassName", aFilterClassName);
+    //    update.set("employees", someEmployees);
+    //    update.set("dateFrom", aDateFrom);
+    //    update.set("dateTo", aDateTo);
+    //    update.set("status", aStatus);
     //
     // mongoTemplate.updateFirst(Query.query(Criteria.where("rLiqFilterClassName").is(oldFilterClassName)), update,
-    //                FilterConfiguration.class);
+    //        FilterConfiguration.class);
     /////////////////////////////////////////////////////////////////////
-    //        Collection<String> result = new ArrayList<String>();
-    //        DistinctIterable<String> distinctIterable =
+    //    Collection<String> result = new ArrayList<String>();
+    //    DistinctIterable<String> distinctIterable =
     // mongoTemplate.getCollection("receipt").distinct("ulic",
-    //                String.class);
-    //        MongoCursor<String> cursor = distinctIterable.iterator();
-    //        while (cursor.hasNext()) {
-    //            result.add(cursor.next().toString());
-    //        }
+    //        String.class);
+    //    MongoCursor<String> cursor = distinctIterable.iterator();
+    //    while (cursor.hasNext()) {
+    //      result.add(cursor.next().toString());
+    //    }
     //
-    //        return result.size();
+    //    return result.size();
     //////////////////////////////////////////////////////////////////////
-    //        GroupOperation sum = Aggregation.group("period").count().as("count");
-    //        SortOperation sortByCount = Aggregation.sort(Direction.ASC, "period");
+    //    GroupOperation sum = Aggregation.group("period").count().as("count");
+    //    SortOperation sortByCount = Aggregation.sort(Direction.ASC, "period");
     //
-    //        Aggregation aggregation = Aggregation.newAggregation(sum, sortByCount);
+    //    Aggregation aggregation = Aggregation.newAggregation(sum, sortByCount);
     //
-    //        AggregationResults<ResultCount> result = mongoTemplate.aggregate(aggregation,
+    //    AggregationResults<ResultCount> result = mongoTemplate.aggregate(aggregation,
     // "liquidation",
-    //                ResultCount.class);
-    //        return result.getMappedResults();
+    //        ResultCount.class);
+    //    return result.getMappedResults();
   }
 }
