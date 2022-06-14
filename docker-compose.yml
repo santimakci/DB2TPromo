@@ -15,7 +15,6 @@ services:
       - Docker/config/db-mongo.conf
     networks:
       - main
-    command: ["--bind_ip", "0.0.0.0"]
 
   postgres:
     image: postgres:13
