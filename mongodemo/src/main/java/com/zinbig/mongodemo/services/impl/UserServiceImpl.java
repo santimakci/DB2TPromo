@@ -74,4 +74,14 @@ public class UserServiceImpl implements IUserService {
     anUser.setPhone(new Phone(aNumber));
     this.getUserRepository().save(anUser);
   }
+
+  /*
+   * Listado de usuarios
+   */
+  /*
+   * @Override
+   * public Iterable<UserDTO> listUsers() {
+   * return this.userRepository
+   * }
+   */
 }

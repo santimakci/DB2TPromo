@@ -27,4 +27,9 @@ public interface IUserService {
    * @param aNumber es el número del teléfono.
    */
   public void addPhone(String anId, String aNumber);
+
+  /*
+   * Listado de usuarios
+   */
+  /* public Iterable<UserDTO> listUsers(); */
 }

@@ -41,6 +41,7 @@ services:
     depends_on:
       - postgres
       - mongodb
+    command: mvn spring-boot:run
 
 networks:
   main:
