@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,8 +27,13 @@ public class DemoController {
   }
 
   @GetMapping("/")
-  public String home() {
-    List<User> users = this.usersService.listUsers();
+  public String home(@RequestParam(required = false) String name) {
+    List<User> users;
+    if (name.equals("mongo")) {
+      users = this.usersService.listUsersMongo();
+    } else {
+      users = this.usersService.listUsers();
+    }
     return users.toString();
   }
 

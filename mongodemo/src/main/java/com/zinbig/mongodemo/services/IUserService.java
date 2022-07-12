@@ -12,4 +12,6 @@ public interface IUserService {
 
   public List<User> listUsers();
 
+  public List<User> listUsersMongo();
+
 }

@@ -32,6 +32,11 @@ public class UserServiceImpl implements IUserService {
     return jpaUserRepository.findAll();
   }
 
+  @Override
+  public List<User> listUsersMongo() {
+    return userRepository.findAll();
+  }
+
   public UserDTO addUser(String aName, String anUsername, String aPassword) {
 
     User newUser = new User(anUsername, aPassword, aName);
