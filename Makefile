@@ -3,11 +3,8 @@ DOCKER = docker exec -it backend-mongodb
 # Show databases: show dbs
 # Show collections: show collections
 mongoshell:
-  $(DOCKER) bash mongo -u root -p root --authenticationDatabase admin
-
+	$(DOCKER) bash mongo -u root -p root --authenticationDatabase admin
 run:
-  docker-compose up
-
+	docker-compose up
 build:
-  docker-compose build
-
+	docker-compose build
