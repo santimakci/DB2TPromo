@@ -3,12 +3,16 @@ package com.zinbig.mongodemo.services.impl;
 
 import com.zinbig.mongodemo.dtos.DTOFactory;
 import com.zinbig.mongodemo.dtos.UserDTO;
+import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.model.User;
+import com.zinbig.mongodemo.repositories.AccidentsRepository;
 import com.zinbig.mongodemo.repositories.UserRepository;
+import com.zinbig.mongodemo.repositories.JpaRepositories.JpaAccidentRepository;
 import com.zinbig.mongodemo.repositories.JpaRepositories.JpaUserRepository;
 import com.zinbig.mongodemo.services.IUserService;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,12 @@ public class UserServiceImpl implements IUserService {
   private UserRepository userRepository;
 
   @Inject
+  private JpaAccidentRepository jpaAccidentRepository;
+
+  @Inject
+  private AccidentsRepository accidentsRepository;
+
+  @Inject
   private DTOFactory dtoFactory;
 
   @Inject
@@ -30,6 +40,16 @@ public class UserServiceImpl implements IUserService {
   @Override
   public List<User> listUsers() {
     return jpaUserRepository.findAll();
+  }
+
+  @Override
+  public Accident getAccidentById(String id) {
+    return jpaAccidentRepository.findById(id).get();
+  }
+
+  @Override
+  public Optional<Accident> getAccidentByIdInMongo(String id) {
+    return accidentsRepository.findById(id);
   }
 
   @Override

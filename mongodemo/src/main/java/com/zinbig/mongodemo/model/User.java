@@ -1,4 +1,3 @@
-/** Este paquete contiene las clases que representan las entidades del dominio. */
 package com.zinbig.mongodemo.model;
 
 import javax.persistence.Entity;

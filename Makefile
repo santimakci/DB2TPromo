@@ -1,4 +1,4 @@
-DOCKER = docker exec -it backend-mongodb
+DOCKER = docker exec -it db-mongo
 # To connect with databse: mongo -u root -p root --authenticationDatabase admin
 # Show databases: show dbs
 # Show collections: show collections

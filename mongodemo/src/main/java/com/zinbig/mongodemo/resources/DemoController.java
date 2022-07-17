@@ -2,13 +2,17 @@
 package com.zinbig.mongodemo.resources;
 
 import com.zinbig.mongodemo.dtos.UserRequestDTO;
+import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.model.User;
 import com.zinbig.mongodemo.services.IUserService;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,13 +32,32 @@ public class DemoController {
 
   @GetMapping("/")
   public String home(@RequestParam(required = false) String name) {
-    List<User> users;
+    /*
+     * List<User> users;
+     * if (name.equals("mongo")) {
+     * users = this.usersService.listUsersMongo();
+     * } else {
+     * users = this.usersService.listUsers();
+     * }
+     * return users.toString();
+     */
+    return "Hello " + name;
+  }
+
+  @GetMapping("/accidents/{id}")
+  public ResponseEntity<Accident> getAccident(@PathVariable String id,
+      @RequestParam(required = false, defaultValue = "postgres") String name) {
+    Accident accident;
     if (name.equals("mongo")) {
-      users = this.usersService.listUsersMongo();
+      accident = this.usersService.getAccidentByIdInMongo(id).get();
     } else {
-      users = this.usersService.listUsers();
+      accident = this.getUsersService().getAccidentById(id);
     }
-    return users.toString();
+    if (accident.id == null) {
+      return ResponseEntity.notFound().build();
+    } else {
+      return ResponseEntity.ok(accident);
+    }
   }
 
   public IUserService getUsersService() {
