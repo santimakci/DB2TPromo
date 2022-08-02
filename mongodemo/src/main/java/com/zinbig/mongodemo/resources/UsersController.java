@@ -2,12 +2,8 @@
 package com.zinbig.mongodemo.resources;
 
 import com.zinbig.mongodemo.dtos.UserRequestDTO;
-import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.model.User;
 import com.zinbig.mongodemo.services.IUserService;
-
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
@@ -19,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DemoController {
+public class UsersController {
 
   @Inject
   private IUserService usersService;
@@ -30,34 +26,26 @@ public class DemoController {
         .addUser(anUserRequestDTO.name, anUserRequestDTO.username, anUserRequestDTO.password);
   }
 
-  @GetMapping("/")
-  public String home(@RequestParam(required = false) String name) {
-    /*
-     * List<User> users;
-     * if (name.equals("mongo")) {
-     * users = this.usersService.listUsersMongo();
-     * } else {
-     * users = this.usersService.listUsers();
-     * }
-     * return users.toString();
-     */
-    return "Hello " + name;
-  }
-
-  @GetMapping("/accidents/{id}")
-  public ResponseEntity<Accident> getAccident(@PathVariable String id,
+  @GetMapping("/api/users/{username}")
+  public ResponseEntity<User> getUser(@PathVariable("username") String username,
       @RequestParam(required = false, defaultValue = "postgres") String name) {
-    Accident accident;
+
+    User user;
     if (name.equals("mongo")) {
-      accident = this.usersService.getAccidentByIdInMongo(id).get();
+      user = this.usersService.getUserMongoByUsername(username);
     } else {
-      accident = this.getUsersService().getAccidentById(id);
+      user = this.usersService.getUserJpaByUsername(username);
     }
-    if (accident.id == null) {
+    if (user == null) {
       return ResponseEntity.notFound().build();
     } else {
-      return ResponseEntity.ok(accident);
+      return ResponseEntity.ok(user);
     }
+  }
+
+  @GetMapping("/")
+  public String home(@RequestParam(required = false) String name) {
+    return "Hello " + name;
   }
 
   public IUserService getUsersService() {

@@ -2,10 +2,8 @@
 package com.zinbig.mongodemo.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.zinbig.mongodemo.dtos.UserDTO;
-import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.model.User;
 
 public interface IUserService {
@@ -16,8 +14,8 @@ public interface IUserService {
 
   public List<User> listUsersMongo();
 
-  public Accident getAccidentById(String anId);
+  public User getUserMongoByUsername(String id);
 
-  public Optional<Accident> getAccidentByIdInMongo(String anId);
+  public User getUserJpaByUsername(String id);
 
 }

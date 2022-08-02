@@ -8,4 +8,6 @@ import com.zinbig.mongodemo.model.User;
 @Repository
 public interface JpaUserRepository extends JpaRepository<User, String> {
 
+    User findByUsername(String username);
+
 }
