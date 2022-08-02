@@ -73,9 +73,6 @@ de name, username y password
 1. Devolver todos los accidentes ocurridos entre 2 fechas dadas
    - Endpoint: `/api/accidents/`
    - Query params:
-     - `start:` Fecha de inicio con formato `DD-MM-AAA` ej: `08-02-2016`
-     - `end:` Fecha de fiin con formato `DD-MM-AAA` ej: `08-02-2016`
-     - `name`: Nombre de la base de datos a utilizar, por defecto usa postgres salvo que `name`sea igual a mongo e: `name=mongo`
 
 | Param | explicacion                                                     | ej                 |
 | ----- | --------------------------------------------------------------- | ------------------ |
