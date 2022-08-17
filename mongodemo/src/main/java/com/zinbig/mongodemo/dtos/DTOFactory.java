@@ -9,4 +9,5 @@ public class DTOFactory {
   public UserDTO createUserDTO(User anUser) {
     return new UserDTO(anUser.getId(), anUser.getUsername(), anUser.getName(), anUser.version);
   }
+
 }

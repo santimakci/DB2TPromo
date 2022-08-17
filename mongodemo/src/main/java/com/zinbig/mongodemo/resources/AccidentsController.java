@@ -40,10 +40,14 @@ public class AccidentsController {
             Date endD = formatter.parse(end + "T00:00:00");
             accidents = accidentService.listAccidentsBetweenDates(startD, endD);
         }
-        // print total accidents
-        System.out.println("Total accidents: " + accidents.size());
-
         return ResponseEntity.ok(accidents);
+    }
+
+    @GetMapping("/api/accidents/commons/")
+    public ResponseEntity<Accident> returnConditionMoreCommon(@RequestParam(required = false) String columnn,
+            @RequestParam(required = false, defaultValue = "postgres") String name) throws ParseException {
+        Accident accident = accidentService.returnConditionMoreCommon("start_time");
+        return ResponseEntity.ok(accident);
     }
 
     // @GetMapping("/accidents/{id}")

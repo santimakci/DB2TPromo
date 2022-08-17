@@ -13,6 +13,8 @@ public interface IAccidentService {
 
     public List<Accident> listAccidentsBetweenDatesMongo(Date start, Date end);
 
+    public Accident returnConditionMoreCommon(String columnn);
+
     // public Accident getAccidentByIdInMongo(String anId);
 
 }

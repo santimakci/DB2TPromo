@@ -5,7 +5,7 @@ DOCKER = docker exec -it db-mongo
 #mongodb://127.0.0.1:27017/?authSource=admin&compressors=disabled&gssapiServiceName=mongodb
 
 mongoshell:
-	$(DOCKER) bash mongo -u root -p root --authenticationDatabase admin
+	$(DOCKER) bash -c "mongo" 
 run:
 	docker-compose up
 build:

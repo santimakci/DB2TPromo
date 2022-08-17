@@ -1,6 +1,7 @@
 /** Este paquete contiene las implementaciones de los servicios. */
 package com.zinbig.mongodemo.services.impl;
 
+import com.zinbig.mongodemo.dtos.AccidentCommon;
 import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.repositories.AccidentsRepository;
 import com.zinbig.mongodemo.repositories.JpaRepositories.JpaAccidentRepository;
@@ -10,6 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +26,9 @@ public class AccidentServiceImpl implements IAccidentService {
 
     @Inject
     private AccidentsRepository accidentsRepository;
+
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public List<Accident> listAccidentsBetweenDates(Date start, Date end) {
@@ -35,6 +43,14 @@ public class AccidentServiceImpl implements IAccidentService {
     @Override
     public List<Accident> listAccidentsBetweenDatesMongo(Date start, Date end) {
         return accidentsRepository.findBetweenDatesAccidents(start, end);
+    }
+
+    @Override
+    public Accident returnConditionMoreCommon(String column) {
+        String col = "start_time";
+        List<AccidentCommon> a = jpaAccidentRepository.returnConditionMoreCommon(col);
+        Accident accident = new Accident();
+        return accident;
     }
 
     // @Override
