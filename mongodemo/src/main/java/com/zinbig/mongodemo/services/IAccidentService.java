@@ -3,6 +3,7 @@ package com.zinbig.mongodemo.services;
 import java.util.Date;
 import java.util.List;
 
+import com.zinbig.mongodemo.dtos.AccidentCommon;
 import com.zinbig.mongodemo.model.Accident;
 
 public interface IAccidentService {
@@ -13,8 +14,15 @@ public interface IAccidentService {
 
     public List<Accident> listAccidentsBetweenDatesMongo(Date start, Date end);
 
-    public Accident returnConditionMoreCommon(String columnn);
+    public AccidentCommon findHumidityMoreCommon();
 
+    public AccidentCommon findTemperatureMoreCommon();
+
+    public AccidentCommon findWeatherConditionMoreCommon();
+
+    public AccidentCommon findWindDirectionMoreCommon();
+
+    public AccidentCommon findStartTimeMoreCommon();
     // public Accident getAccidentByIdInMongo(String anId);
 
 }

@@ -62,8 +62,6 @@ de name, username y password
 
 - Con el comando `make mongoshell` en una segunda ventana con docker corriendo podémos abrir una consola de mongo
 
-ó
-
 # Proyecto
 
 - Pararse sobre la carpeta mongodemo y ejecutar `mvn spring-boot:run` con las dbs levantadas
@@ -79,3 +77,24 @@ de name, username y password
 | start | Fecha de inicio con formato `DD-MM-AAA`                         | `start=08-02-2016` |
 | end   | Fecha de fiin con formato `DD-MM-AAA`                           | `end=09-02-2016`   |
 | name  | Nombre de la base de datos a utilizar, por defecto usa postgres | `name=mongo`       |
+
+2. Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
+   Se puede extraer la información más común de 5 condiciones: `Fecha`, `Humedad`, `Temperatura`, `Dirección del viento` y `Condición climática`.
+
+- Endpoints:
+  - `/api/accidents/commons/starttime/`
+  - `/api/accidents/commons/humidity/`
+  - `/api/accidents/commons/temperature/`
+  - `/api/accidents/commons/winddirection/`
+  - `/api/accidents/commons/whather/`
+
+En todos los casos responde un json con el siguiente formato:
+
+```json
+{
+	"condition": <Condición más común>
+	"total": <Número de veces que aparece>
+}
+```
+
+3.

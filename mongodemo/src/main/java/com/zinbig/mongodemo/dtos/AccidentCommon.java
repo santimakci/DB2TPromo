@@ -4,10 +4,10 @@ import javax.persistence.Column;
 
 public interface AccidentCommon {
 
-    @Column(name = "col")
-    public String getCol();
+    @Column(name = "condition")
+    public String getCondition();
 
-    @Column(name = "tot")
-    public int getTot();
+    @Column(name = "total")
+    public int getTotal();
 
 }

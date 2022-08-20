@@ -1,5 +1,6 @@
 package com.zinbig.mongodemo.resources;
 
+import com.zinbig.mongodemo.dtos.AccidentCommon;
 import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.services.IAccidentService;
 
@@ -43,27 +44,34 @@ public class AccidentsController {
         return ResponseEntity.ok(accidents);
     }
 
-    @GetMapping("/api/accidents/commons/")
-    public ResponseEntity<Accident> returnConditionMoreCommon(@RequestParam(required = false) String columnn,
-            @RequestParam(required = false, defaultValue = "postgres") String name) throws ParseException {
-        Accident accident = accidentService.returnConditionMoreCommon("start_time");
+    @GetMapping("/api/accidents/commons/humidity/")
+    public ResponseEntity<AccidentCommon> returnConditionMoreCommon() throws ParseException {
+        AccidentCommon accident = accidentService.findHumidityMoreCommon();
         return ResponseEntity.ok(accident);
     }
 
-    // @GetMapping("/accidents/{id}")
-    // public ResponseEntity<Accident> getAccident(@PathVariable String id,
-    // @RequestParam(required = false, defaultValue = "postgres") String name) {
-    // Accident accident;
-    // if (name.equals("mongo")) {
-    // accident = this.accidentService.getAccidentByIdInMongo(id);
-    // } else {
-    // accident = this.accidentService.getAccidentById(id);
-    // }
-    // if (accident == null) {
-    // return ResponseEntity.notFound().build();
-    // } else {
-    // return ResponseEntity.ok(accident);
-    // }
-    // }
+    @GetMapping("/api/accidents/commons/temperature/")
+    public ResponseEntity<AccidentCommon> returnTemperatureMoreCommon() throws ParseException {
+        AccidentCommon accident = accidentService.findTemperatureMoreCommon();
+        return ResponseEntity.ok(accident);
+    }
+
+    @GetMapping("/api/accidents/commons/whather/")
+    public ResponseEntity<AccidentCommon> returnWindSpeedMoreCommon() throws ParseException {
+        AccidentCommon accident = accidentService.findWeatherConditionMoreCommon();
+        return ResponseEntity.ok(accident);
+    }
+
+    @GetMapping("/api/accidents/commons/winddirection/")
+    public ResponseEntity<AccidentCommon> returnWindDirectionMoreCommon() throws ParseException {
+        AccidentCommon accident = accidentService.findWindDirectionMoreCommon();
+        return ResponseEntity.ok(accident);
+    }
+
+    @GetMapping("/api/accidents/commons/starttime/")
+    public ResponseEntity<AccidentCommon> returnStartTimeMoreCommon() throws ParseException {
+        AccidentCommon accident = accidentService.findStartTimeMoreCommon();
+        return ResponseEntity.ok(accident);
+    }
 
 }

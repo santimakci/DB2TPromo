@@ -11,10 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +24,6 @@ public class AccidentServiceImpl implements IAccidentService {
 
     @Inject
     private AccidentsRepository accidentsRepository;
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @Override
     public List<Accident> listAccidentsBetweenDates(Date start, Date end) {
@@ -46,26 +41,33 @@ public class AccidentServiceImpl implements IAccidentService {
     }
 
     @Override
-    public Accident returnConditionMoreCommon(String column) {
-        String col = "start_time";
-        List<AccidentCommon> a = jpaAccidentRepository.returnConditionMoreCommon(col);
-        Accident accident = new Accident();
-        return accident;
+    public AccidentCommon findHumidityMoreCommon() {
+        Pageable top = PageRequest.of(0, 1);
+        return jpaAccidentRepository.findHumidityMoreCommon(top).get(0);
     }
 
-    // @Override
-    // public Accident getAccidentByIdInMongo(String id) {
-    // Accident accident = null;
-    // try {
-    // accident = accidentsRepository.findFirst();
-    // if (accident != null) {
-    // return accident;
-    // } else {
-    // return null;
-    // }
-    // } catch (Exception e) {
-    // System.out.println(e.getMessage());
-    // return null;
-    // }
-    // }
+    @Override
+    public AccidentCommon findTemperatureMoreCommon() {
+        Pageable top = PageRequest.of(0, 1);
+        return jpaAccidentRepository.findTemperatureMoreCommon(top).get(0);
+    }
+
+    @Override
+    public AccidentCommon findWeatherConditionMoreCommon() {
+        Pageable top = PageRequest.of(0, 1);
+        return jpaAccidentRepository.findWeatherConditionMoreCommon(top).get(0);
+    }
+
+    @Override
+    public AccidentCommon findWindDirectionMoreCommon() {
+        Pageable top = PageRequest.of(0, 1);
+        return jpaAccidentRepository.findWindDirectionMoreCommon(top).get(0);
+    }
+
+    @Override
+    public AccidentCommon findStartTimeMoreCommon() {
+        Pageable top = PageRequest.of(0, 1);
+        return jpaAccidentRepository.findStartTimeMoreCommon(top).get(0);
+    }
+
 }
