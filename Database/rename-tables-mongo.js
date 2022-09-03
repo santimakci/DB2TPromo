@@ -74,7 +74,7 @@ db.accident.aggregate([
     $geoNear: {
       near: { type: "Point", coordinates: [-84.058723, 39.865147] },
       distanceField: "dist.calculated",
-      maxDistance: 1,
+      maxDistance: 1000,
       includeLocs: "dist.accident_id",
       spherical: true,
     },
