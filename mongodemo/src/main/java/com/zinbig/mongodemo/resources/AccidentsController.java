@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
@@ -72,6 +73,12 @@ public class AccidentsController {
     public ResponseEntity<AccidentCommon> returnStartTimeMoreCommon() throws ParseException {
         AccidentCommon accident = accidentService.findStartTimeMoreCommon();
         return ResponseEntity.ok(accident);
+    }
+
+    @PostMapping("/api/accidents/elastic/")
+    public ResponseEntity<String> saveAccidentsElastic() throws ParseException {
+        accidentService.saveAccidentsElastic();
+        return ResponseEntity.ok("Accidents saved in elastic");
     }
 
 }

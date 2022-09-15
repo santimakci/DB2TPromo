@@ -4,10 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.persistence.GeneratedValue;
 
 @Entity
 @Table(name = "users")
+@Document(indexName = "users")
 public class User {
 
   @Id

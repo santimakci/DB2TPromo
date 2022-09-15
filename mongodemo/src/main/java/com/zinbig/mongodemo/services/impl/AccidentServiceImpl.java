@@ -4,6 +4,7 @@ package com.zinbig.mongodemo.services.impl;
 import com.zinbig.mongodemo.dtos.AccidentCommon;
 import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.repositories.AccidentsRepository;
+import com.zinbig.mongodemo.repositories.ElasticRepostories.AccidentsElasticRepository;
 import com.zinbig.mongodemo.repositories.JpaRepositories.JpaAccidentRepository;
 import com.zinbig.mongodemo.services.IAccidentService;
 
@@ -24,6 +25,9 @@ public class AccidentServiceImpl implements IAccidentService {
 
     @Inject
     private AccidentsRepository accidentsRepository;
+
+    @Inject
+    private AccidentsElasticRepository elasticAccidentsRepository;
 
     @Override
     public List<Accident> listAccidentsBetweenDates(Date start, Date end) {
@@ -68,6 +72,31 @@ public class AccidentServiceImpl implements IAccidentService {
     public AccidentCommon findStartTimeMoreCommon() {
         Pageable top = PageRequest.of(0, 1);
         return jpaAccidentRepository.findStartTimeMoreCommon(top).get(0);
+    }
+
+    @Override
+    public void saveAccidentsElastic() {
+        Pageable topN;
+        List<Accident> accidents;
+        int total = 0;
+        int totalErrors = 0;
+        Long totalAccidents = jpaAccidentRepository.getTotalAccidents();
+        totalAccidents = totalAccidents / 1000;
+        for (int i = 0; i <= totalAccidents; i++) {
+            try {
+                topN = PageRequest.of(i, 1000);
+                accidents = jpaAccidentRepository.findNAccidents(topN);
+                elasticAccidentsRepository.saveAll(accidents);
+                total = total + accidents.size();
+                System.out.println("Total: " + total);
+                System.out.println("Restantes:" + (totalAccidents - i) * 1000);
+            } catch (Exception e) {
+                totalErrors++;
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        System.out.println("Total cargados: " + total);
+        System.out.println("Total errores: " + totalErrors);
     }
 
 }
