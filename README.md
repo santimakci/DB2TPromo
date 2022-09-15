@@ -64,7 +64,7 @@ de name, username y password
 
 # Proyecto
 
-- Pararse sobre la carpeta mongodemo y ejecutar `mvn spring-boot:run` con las dbs levantadas
+- Pararse sobre la carpeta app y ejecutar `mvn spring-boot:run` con las dbs levantadas
 
 # Consultas
 

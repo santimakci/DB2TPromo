@@ -73,9 +73,9 @@ services:
     networks:
       - main
     
-  #mongodemo:
+  #app:
   #  restart: always
-  #  container_name: backend-mongodemo
+  #  container_name: backend-app
   #  build:
   #    context: .
   #    dockerfile: Dockerfile

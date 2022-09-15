@@ -1,15 +1,15 @@
 FROM maven:3.6.3
 FROM openjdk:16-alpine3.13
 
-RUN mkdir /mongodemo
+RUN mkdir /app
 
-WORKDIR /mongodemo
+WORKDIR /app
 
-COPY mongodemo/.mvn/ .mvn
+COPY app/.mvn/ .mvn
 
-COPY mongodemo/mvnw mongodemo/pom.xml ./
+COPY app/mvnw app/pom.xml ./
 
-COPY mongodemo/src ./src
+COPY app/src ./src
 
 RUN mvn clean install
 
