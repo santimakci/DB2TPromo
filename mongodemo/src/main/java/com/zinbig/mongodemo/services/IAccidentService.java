@@ -25,4 +25,6 @@ public interface IAccidentService {
     public AccidentCommon findStartTimeMoreCommon();
     // public Accident getAccidentByIdInMongo(String anId);
 
+    public void saveAccidentsElastic();
+
 }

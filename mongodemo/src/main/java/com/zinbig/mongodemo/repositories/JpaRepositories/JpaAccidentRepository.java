@@ -20,6 +20,14 @@ public interface JpaAccidentRepository extends JpaRepository<Accident, String> {
     @Query("SELECT humidity AS condition, COUNT(*) AS total FROM Accident GROUP BY condition ORDER BY total DESC")
     public List<AccidentCommon> findHumidityMoreCommon(Pageable pageable);
 
+    // Find first ten accidents
+    @Query("FROM Accident")
+    public List<Accident> findNAccidents(Pageable pageable);
+
+    // get total accidents
+    @Query("SELECT COUNT(*) FROM Accident")
+    public Long getTotalAccidents();
+
     @Query("SELECT temperature AS condition, COUNT(*) AS total FROM Accident GROUP BY condition ORDER BY total DESC")
     public List<AccidentCommon> findTemperatureMoreCommon(Pageable pageable);
 

@@ -6,10 +6,17 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+
 @Entity
+@Document(indexName = "accidents")
 public class Accident {
 
-    @Id
+    @Id()
+    // La anottation field es necesaria porque elastic exige tener un field llamado
+    // id, si se saca no levanta el proyecto
+    @Field(name = "id")
     public String id_accident;
     public Boolean stop;
     public Boolean traffic_calming;

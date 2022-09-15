@@ -26,6 +26,53 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+
+  cerebro:
+    image: lmenezes/cerebro:0.8.1
+    container_name: cerebro
+    restart: always
+    ports:
+      - "9000:9000"
+    networks:
+      - main
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+    container_name: elasticsearch
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    expose:
+      - 9200
+    networks:
+      - main
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - main
+    
   #mongodemo:
   #  restart: always
   #  container_name: backend-mongodemo
@@ -50,3 +97,4 @@ networks:
 volumes:
   mongo-data:
   postgres_data:
+  elasticsearch-data:

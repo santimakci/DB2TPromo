@@ -52,7 +52,6 @@ public class UserServiceImpl implements IUserService {
     User newUser = new User(anUsername, aPassword, aName);
 
     this.getUserRepository().save(newUser);
-
     return this.getDtoFactory().createUserDTO(newUser);
   }
 
